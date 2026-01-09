@@ -5,6 +5,9 @@ class User(AbstractUser):
     # Champs supplémentaires pour le profil utilisateur
     bio = models.TextField(blank=True)
     avatar = models.URLField(blank=True)
+    
+    class Meta:
+        db_table = 'octofit_tracker_user'
 
 class Team(models.Model):
     name = models.CharField(max_length=100, unique=True)

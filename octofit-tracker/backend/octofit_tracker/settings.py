@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,8 +27,10 @@ SECRET_KEY = 'django-insecure-h$cu@byqj0n%luxx@&9&v7&!@d%2x9vv&4u=jj5h-q$o)$^n3e
 DEBUG = True
 
 
-# Autoriser tous les hôtes
-ALLOWED_HOSTS = ['*']
+# Autoriser les hôtes du codespace et localhost
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if os.environ.get('CODESPACE_NAME'):
+    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
 
 
 # Application definition
@@ -115,6 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
+# Utiliser le modèle User personnalisé
+AUTH_USER_MODEL = 'octofit_tracker.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
